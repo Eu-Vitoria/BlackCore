@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>BlackCore Gamer</title>
+
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --primary: #111111;
+  --accent: #444;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+:focus {
+  text-decoration: none;
+
+}
+
+.titulo{
+    text-align: center;
+      color: green;
+}
+
+header {
+  background: var(--primary);
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 5px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+
+.banner {
+  text-align: center;
+  padding: 50px 20px;
+   background:
+   linear-gradient(to right, #22c55e31, #0000002d),
+    radial-gradient(circle, #22c55e 2px, transparent 2px),
+    radial-gradient(circle, #000000 2px, transparent 2px);
+  background-size: 30px 30px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.301);
+}
+
+
+.banner h1 {
+  font-size: 2.5rem; 
+  font-family: cursive;
+}
+
+
+
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background: white;
+
+  width: 100%;
+  max-width: 250px;
+
+  transition: 0.3s;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.oferta {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: white;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+}
+
+.card button {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card button:focus {
+  outline: none;
+}
+
+.card button:hover {
+  background: #333;
+   outline: 3px solid #25D366;
+}
+
+
+
+.titulo {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 2rem;
+}
+
+.preco {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.preco-antigo {
+  color: #666666;
+  text-decoration: line-through;
+  font-size: 0.9rem;
+  filter: blur(0.5px); 
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.avaliacao {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.estrela {
+  color: #ccc;
+  transition: 0.2s;
+}
+
+.estrela.ativa {
+  color: black;
+}
+
+.nota {
+  font-size: 0.9rem;
+}
+
+.carrinho {
+  background: rgba(0, 0, 0, 0.274);
+  color: rgb(187, 187, 187);
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.carrinho:hover {
+  background: #25D366;
+
+}
+
+#contador {
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
+.btn-adicionar {
+  margin-top: 8px;
+  background: #515553;
+  color: rgb(56, 46, 46);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-adicionar:hover {
+  background: #1ebe5d;
+  transform: scale(1.02);
+}
+
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-family:bold;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+.menu a:focus {
+  text-decoration: none;
+  border: none;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.login {
+    background-color: #25D366;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login:hover {
+  text-decoration: underline;
+  background-color: #1cbe57;
+}
+
+.login:focus {
+  border: none;
+}
+
+ .text {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 26px;
+      fill: #ffffff;
+      letter-spacing: 1px;
+    }
+    .highlight {
+      fill: #25D366;
+      font-weight: bold;
+    }
+
+.painel-carrinho{
+ position: fixed;
+  right: -350px;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -8px 0 25px rgba(0,0,0,0.15);
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 999;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.painel-carrinho.ativo {
+  right: 0;
+}
+
+@media (max-width: 480px) {
+  .painel-carrinho {
+    width: 100%;
+  }
+}
+
+.item-carrinho {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 998;
+}
+
+/* quando ativo */
+.overlay.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+.carrinho-header {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+
+.carrinho-header h2 {
+  margin: 0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}   
+
+.btn-remover {
+  background: transparent;
+  border: none;
+  color: #888;
+  margin-bottom: 40px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.copyright {
+  margin-top: 20px;
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.footer {
+  background: #111;
+  color: white;
+  padding: 40px 20px;
+  transition: all 1s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.footer {
+  background-color: #111;
+  color: #fff;
+  padding: 40px 20px 20px;
+  margin-top: 50px;
+  box-shadow: #00ff8831 0px 0px 10px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section a {
+  color: #bbb;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.footer {
+  position: relative;
+  background: #0a0a0a;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 30px;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1s ease;
+   box-shadow: #0000006e 0px 0px 10px;
+}
+
+.footer.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 3px;
+  box-shadow: #0000006e 0px 0px 10px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #25D366,
+    #22c55e31,
+    transparent
+  );
+
+  animation: linhaNeon 4s linear infinite;
+}
+
+@keyframes linhaNeon {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.footer::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #3030302f;
+  border-radius: 50%;
+  filter: blur(100px);
+
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  animation: pulseBg 5s ease-in-out infinite;
+}
+
+@keyframes pulseBg {
+  0% {
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    transform: translateX(-50%) scale(1.2);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* Textos aparecendo */
+.footer p,
+.footer h1 {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Quando footer aparece */
+.footer.show p {
+  animation: subirTexto 0.8s forwards;
+}
+
+.footer.show h1 {
+  animation: subirTexto 1.2s forwards;
+}
+
+.footer.show p:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.footer.show p:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.footer.show h1 {
+  animation-delay: 1s;
+}
+
+@keyframes subirTexto {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* WhatsApp flutuando */
+.whatsapp-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-size: 34px;
+  color: #25D366;
+  text-decoration: none;
+
+  animation:
+    floatIcon 3s ease-in-out infinite,
+    glowIcon 2s infinite;
+}
+
+
+@keyframes glowIcon {
+  0% {
+    text-shadow: 0 0 5px #25D366;
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px #25D366,
+      0 0 20px #25D366,
+      0 0 40px #00ffcc;
+  }
+
+  100% {
+    text-shadow: 0 0 5px #25D366;
+  }
+}
+
+.barra-pesquisa {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.barra-pesquisa input {
+  width: 320px;
+  max-width: 90%;
+  padding: 12px 15px;
+  border: 2px solid #25D366;
+  border-radius: 30px;
+  outline: none;
+  font-size: 1rem;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.barra-pesquisa input:focus {
+  box-shadow: 0 0 12px #25D366;
+}
+
+.barra-pesquisa button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 50%;
+  background: #25D366;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+.barra-pesquisa button:hover {
+  background: #1ebe5d;
+  transform: scale(1.05);
+}
+
+.banner p{
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="18" stroke="#25D366" stroke-width="2" fill="none"/>
+  <text x="60" y="36" class="text">
+    Black<tspan class="highlight">Core</tspan>
+  </text>
+    </svg>
+  <nav>
+    <div class="carrinho" aria-label="Carrinho de compras"  onclick="toggleCarrinho()">
+  🛒 <span id="contador">0</span>
+</div>
+ <button class="login" onclick="window.location.href='login.html'">
+  👤 Entrar
+</button>
+    <a href="#">Inicio</a>
+    <a href="#">Produtos</a>
+   <a href="#footer">Contato</a>
+
+  </nav>
+</header>
+
+<section class="banner">
+  <h1>Periféricos Gamer de Alto Nível</h1>
+  <p>Performance, estilo e precisão para seu setup</p>
+   <div class="barra-pesquisa">
+  <input type="text" id="pesquisa" placeholder="Pesquisar produtos...">
+  <button><i class="fa fa-search"></i></button>
+</div>
+
+</section>
+  
+   <h1 class="titulo">OFERTAS ESPECIAIS</h1>
+
+<section class="produtos">
+
+    <div class="card">
+        <span class="oferta">OFERTA!</span>
+    <img src="img/mouse.jpg" alt="Mouse Gamer RGB">
+    <h2>Mouse Gamer RGB</h2>
+
+    <div class="avaliacao" data-rating="0">
+      <span class="estrela" data-value="1">★</span>
+      <span class="estrela" data-value="2">★</span>
+      <span class="estrela" data-value="3">★</span>
+      <span class="estrela" data-value="4">★</span>
+      <span class="estrela" data-value="5">★</span>
+      <span class="nota">(4,9)</span>
+    </div>
+    <p class="preco-antigo">R$ 199,90</p>
+    <p class="preco">R$ 149,90</p>
+    <p>Alta precisão e iluminação customizável</p>
+    <button aria-label="Comprar Mouse Gamer RGB">Comprar</button>
+    <button class="btn-adicionar" data-nome="Mouse Gamer RGB" data-preco="149.90">
+  🛒 Adicionar ao carrinho
+</button>
+  </div>
+
+
+  <div class="card">
+    <span class="oferta">OFERTA!</span>
+    <img src="img/teclado.jpg" alt="Teclado Mecânico">
+    <h2>Teclado Mecânico</h2>
+
+    <div class="avaliacao" data-rating="0">
+      <span class="estrela" data-value="1">★</span>
+      <span class="estrela" data-value="2">★</span>
+      <span class="estrela" data-value="3">★</span>
+      <span class="estrela" data-value="4">★</span>
+      <span class="estrela" data-value="5">★</span>
+      <span class="nota">(4,0)</span>
+    </div>
+    <p class="preco-antigo">R$ 200,00</p>
+    <p class="preco">R$ 169,90</p>
+    <p>Switches rápidos e duráveis</p>
+    <button aria-label="Comprar Teclado Mecânico" class="btn">Comprar</button>
+    <button class="btn-adicionar" data-nome="Teclado Mecânico" data-preco="299.90">
+  🛒 Adicionar ao carrinho
+</button>
+  </div>
+
+  <div class="card">
+    <span class="oferta">OFERTA!</span>
+    <img src="img/fone.jfif" alt="Headset Gamer">
+    <h2>Headset Gamer</h2>
+
+    <div class="avaliacao" data-rating="0">
+      <span class="estrela" data-value="1">★</span>
+      <span class="estrela" data-value="2">★</span>
+      <span class="estrela" data-value="3">★</span>
+      <span class="estrela" data-value="4">★</span>
+      <span class="estrela" data-value="5">★</span>
+      <span class="nota">(4,5)</span>
+    </div>
+    <p class="preco-antigo">R$ 299,90</p>
+    <p class="preco">R$ 199,90</p>
+    <p>Som imersivo e microfone de alta qualidade</p>
+    <button aria-label="Comprar Headset Gamer" class="btn">Comprar</button>
+    <button class="btn-adicionar" data-nome="Headset Gamer" data-preco="199.90">
+  🛒 Adicionar ao carrinho
+</button>
+  </div>
+
+  <div class="outros" id="lista-produtos">
+    <div class="card">
+        <span class="oferta">OFERTA!</span>
+      <img src="img/monitor.webp" alt="Monitor Gamer">
+      <h2>Monitor Gamer</h2>
+      <div class="avaliacao" data-rating="0">
+      <span class="estrela" data-value="1">★</span>
+      <span class="estrela" data-value="2">★</span>
+      <span class="estrela" data-value="3">★</span>
+      <span class="estrela" data-value="4">★</span>
+      <span class="estrela" data-value="5">★</span>
+      <span class="nota">(4,2)</span>
+    </div>
+    <p class="preco-antigo">R$ 600,00</p>
+    <p class="preco">R$ 549,90</p>
+      <p>Alta taxa de atualização e resolução nítida</p>
+        <button aria-label="Comprar Monitor Gamer" class="btn">Comprar</button>
+         <button class="btn-adicionar" data-nome="Monitor Gamer" data-preco="999.90">
+  🛒 Adicionar ao carrinho
+</button>
+    </div>
+  </div>
+>
+  <div class="overlay"></div>
+
+  <div id="painel-carrinho" class="painel-carrinho">
+  <div class="carrinho-header">
+     <h2>Meu Carrinho</h2>
+      </div>
+  <div id="itens"></div>
+     <p id="total">Total: R$ 0,00</p>
+      </div>
+
+</section>
+
+<footer class="footer hidden" id="footer">
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3>BlackCore</h3>
+      <p>Desenvolvido especialmente para atender as suas necessidades!</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Links rápidos</h4>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contato</h4>
+      <p>Email: contato@gmail.com</p>
+      <p>Telefone: (41) 047823-7773</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 BlackCore. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+
+let carrinho = [];
+
+const painel = document.getElementById("painel-carrinho");
+const overlay = document.querySelector(".overlay");
+
+// Carrinho
+function toggleCarrinho() {
+  painel.classList.toggle("ativo");
+  overlay.classList.toggle("ativo");
+}
+
+overlay.addEventListener("click", () => {
+  painel.classList.remove("ativo");
+  overlay.classList.remove("ativo");
+});
+
+function adicionar(nome, preco) {
+  carrinho.push({ nome, preco });
+  atualizarCarrinho();
+}
+
+function remover(index) {
+  carrinho.splice(index, 1);
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+  const itens = document.getElementById("itens");
+  const contador = document.getElementById("contador");
+  const total = document.getElementById("total");
+
+  itens.innerHTML = "";
+  let soma = 0;
+
+  carrinho.forEach((item, index) => {
+    soma += item.preco;
+
+    itens.innerHTML += `
+      <div class="item-carrinho">
+        <span>${item.nome}</span>
+        <span>R$ ${item.preco.toFixed(2)}</span>
+        <button onclick="remover(${index})" class="btn-remover">❌</button>
+      </div>
+    `;
+  });
+
+  contador.innerText = carrinho.length;
+  total.innerText = "Total: R$ " + soma.toFixed(2);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".btn-adicionar").forEach(btn => {
+    btn.addEventListener("click", () => {
+      adicionar(
+        btn.dataset.nome,
+        parseFloat(btn.dataset.preco)
+      );
+    });
+  });
+});
+
+document.querySelectorAll('.avaliacao').forEach(avaliacao => {
+  const estrelas = avaliacao.querySelectorAll('.estrela');
+  const notaTexto = avaliacao.querySelector('.nota');
+
+  estrelas.forEach(estrela => {
+    estrela.addEventListener('click', () => {
+      const valor = estrela.getAttribute('data-value');
+
+      avaliacao.setAttribute('data-rating', valor);
+      notaTexto.textContent = `(${valor})`;
+
+      estrelas.forEach(e => {
+        e.classList.remove('ativa');
+        if (e.getAttribute('data-value') <= valor) {
+          e.classList.add('ativa');
+        }
+      });
+    });
+  });
+});
+
+const footer = document.getElementById("footer");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      footer.classList.add("show");
+    }
+  });
+});
+
+observer.observe(footer);
+
+
+const pesquisa = document.getElementById("pesquisa");
+
+pesquisa.addEventListener("keyup", () => {
+  const valor = pesquisa.value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const nome = card.querySelector("h2").textContent.toLowerCase();
+
+    if (nome.includes(valor)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
+const btnScroll = document.getElementById("btn-scroll");
+const produtosContainer = document.querySelector(".produtos");
+
+btnScroll.addEventListener("click", () => {
+  produtosContainer.scrollBy({
+    left: 300,
+    behavior: "smooth"
+  });
+});
+
+</script>
+
+</body>
+</html>
