@@ -314,10 +314,10 @@ input[type="submit"]:hover {
 <script>
 
 async function login() {
-  const email = document.querySelector("input[type='email']").value;
+  const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
-  const res = await fetch("http://localhost:3000/login", {
+  const res = await fetch("https://blackcore-5k72.onrender.com/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -327,10 +327,11 @@ async function login() {
 
   const data = await res.json();
 
-  if (data.mensagem) {
-    window.location.href = "inicial.html";
+  if (data.sucesso) {
+    localStorage.setItem("token", data.token);
+    window.location.href = "painel.html";
   } else {
-    alert(data.erro);
+    alert("Login inválido");
   }
 }
 

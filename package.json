@@ -5,7 +5,8 @@
   "main": "server.js",
   "start": "node server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +17,18 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "pg": "^8.20.0"
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.21.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eu-Vitoria/BlackCore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eu-Vitoria/BlackCore/issues"
+  },
+  "homepage": "https://github.com/Eu-Vitoria/BlackCore#readme"
 }
