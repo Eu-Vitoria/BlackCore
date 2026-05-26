@@ -32,8 +32,42 @@ app.post("/cadastro", async (req, res) => {
   }
 });
 
+
+// LOGINNN 
+
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("Servidor rodando");
+});
+
+app.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+
+  try {
+    const user = await pool.query(
+      "SELECT * FROM usuarios WHERE email = $1",
+      [email]
+    );
+
+    if (user.rows.length === 0) {
+      return res.status(400).json({ erro: "Usuário não encontrado" });
+    }
+
+    const usuario = user.rows[0];
+
+    if (usuario.senha !== senha) {
+      return res.status(400).json({ erro: "Senha incorreta" });
+    }
+
+    res.json({
+      mensagem: "Login realizado com sucesso",
+      usuario
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: "Erro no servidor" });
+  }
 });
