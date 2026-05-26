@@ -3,25 +3,23 @@ const router = express.Router();
 const db = require("./db");
 const bcrypt = require("bcrypt");
 
-
-// CADASTRO
 router.post("/cadastro", async (req, res) => {
-  const { usuario, email, senha } = req.body;
+  const { nome, email, senha } = req.body;
 
   try {
     const senhaHash = await bcrypt.hash(senha, 10);
 
     await db.query(
-      "INSERT INTO usuarios (usuario, email, senha) VALUES ($1, $2, $3)",
-      [usuario, email, senhaHash]
+      "INSERT INTO usuarios (nome, email, senha) VALUES ($1, $2, $3)",
+      [nome, email, senhaHash]
     );
 
     res.json({ mensagem: "Usuário cadastrado!" });
   } catch (err) {
+    console.error(err); // 👈 adiciona isso pra debug
     res.status(500).json({ erro: "Erro ao cadastrar" });
   }
 });
-
 
 // LOGIN
 router.post("/login", async (req, res) => {

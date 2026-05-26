@@ -1,11 +1,15 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "blackcore",
-  password: "davina10",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
+
+// teste de conexão
+pool.query("SELECT 1")
+  .then(() => console.log("Banco conectado ✅"))
+  .catch(err => console.error("Erro banco ❌", err));
 
 module.exports = pool;
