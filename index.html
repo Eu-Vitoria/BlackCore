@@ -827,8 +827,8 @@ overlay.addEventListener("click", () => {
   overlay.classList.remove("ativo");
 });
 
-function adicionar(nome, preco) {
-  carrinho.push({ nome, preco });
+function adicionar(usuario, preco) {
+  carrinho.push({ usuario, preco });
   atualizarCarrinho();
 }
 
@@ -850,7 +850,7 @@ function atualizarCarrinho() {
 
     itens.innerHTML += `
       <div class="item-carrinho">
-        <span>${item.nome}</span>
+        <span>${item.usuario}</span>
         <span>R$ ${item.preco.toFixed(2)}</span>
         <button onclick="remover(${index})" class="btn-remover">❌</button>
       </div>
@@ -865,7 +865,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn-adicionar").forEach(btn => {
     btn.addEventListener("click", () => {
       adicionar(
-        btn.dataset.nome,
+        btn.dataset.usuario,
         parseFloat(btn.dataset.preco)
       );
     });
