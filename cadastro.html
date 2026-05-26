@@ -335,7 +335,7 @@ input:focus {
 <script>
 
 async function cadastrar() {
-  const usuario = document.getElementById("usuario").value;
+  const nome = document.getElementById("usuario").value;
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
@@ -345,7 +345,7 @@ async function cadastrar() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ usuario, email, senha })
+      body: JSON.stringify({ nome, email, senha })
     });
 
     const data = await res.json();
