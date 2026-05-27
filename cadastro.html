@@ -358,6 +358,12 @@ async function cadastrar() {
   } catch (err) {
     console.error(err);
     alert("Erro ao cadastrar: " + err.message);
+
+
+localStorage.setItem("user", JSON.stringify(data));
+
+window.location.href = "inicial.html";
+
   }
 }
 

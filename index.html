@@ -1016,46 +1016,6 @@ img, .card, .produtos, .banner, header {
 
 <script>
 
-function login() {
-  localStorage.setItem("logado", "true");
-  localStorage.setItem("nome", "João");
-  localStorage.setItem("email", "joao@email.com");
-
-  verificarLogin();
-}
-
-// LOGOUT
-function logout() {
-  localStorage.removeItem("logado");
-  location.reload();
-}
-
-// VERIFICA
-function verificarLogin() {
-  const logado = localStorage.getItem("logado");
-
-  if (logado) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("perfil").style.display = "block";
-
-    document.getElementById("nome-user").innerText =
-      localStorage.getItem("nome");
-
-    document.getElementById("email-user").innerText =
-      localStorage.getItem("email");
-  }
-}
-
-// ABRIR PERFIL
-function togglePerfil() {
-  document
-    .getElementById("painel-perfil")
-    .classList.toggle("ativo");
-}
-
-// INICIA
-verificarLogin();
-
 let carrinho = [];
 
 const painel = document.getElementById("painel-carrinho");
@@ -1194,6 +1154,21 @@ function toggleMenu() {
   nav.classList.toggle("ativo");
   overlay.classList.toggle("ativo");
 }
+
+app.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user || user.senha !== senha) {
+    return res.status(400).json({ erro: "Credenciais inválidas" });
+  }
+
+  res.json({
+    nome: user.nome,
+    email: user.email
+  });
+});
 
 </script>
 
