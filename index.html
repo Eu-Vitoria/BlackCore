@@ -18,16 +18,14 @@
   box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
+html, body {
+ scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: var(--bg);
   color: var(--text);
-   overflow-x: hidden;
 }
 
 :focus {
@@ -311,7 +309,8 @@ nav a:hover {
   top: 0;
   width: 300px;
   height: 100vh;
-  background: #fff;
+   background: #111;
+  color: #fff;
   box-shadow: -8px 0 25px rgba(0,0,0,0.15);
   padding: 20px;
   transition: right 0.3s ease;
@@ -648,17 +647,8 @@ nav a:hover {
     align-items: center;
   }
 
-  nav {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav a {
-    width: 100%;
-    text-align: center;
-  }
-
+ @media (max-width: 768px) {
+}
   .carrinho {
     width: 90%;
     justify-content: center;
@@ -678,6 +668,11 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+
+  .banner {
+  width: 100%;
+  overflow: hidden;
+}
   .banner h1 {
     font-size: 1.8rem;
   }
@@ -697,6 +692,10 @@ nav a:hover {
   }
 }
 
+img, .card, .produtos, .banner, header {
+  max-width: 100%;
+}
+
 @media (max-width: 480px) {
   .painel-carrinho {
     width: 100%;
@@ -710,12 +709,113 @@ nav a:hover {
   }
 }
 
+
+/* BOTÃO HAMBURGUER */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: rgb(49, 49, 49);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: row; /* 👈 importante */
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: block;
+    color: var(--primary);
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: #111;
+    flex-direction: column;
+    padding-top: 60px;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  nav.ativo {
+    transform: translateX(0);
+  }
+
+  nav a {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+  }
+}
+
+/* ICONE PERFIL */
+.perfil {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* PAINEL PERFIL */
+.painel-perfil {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 85%;
+  max-width: 350px;
+  height: 100vh;
+  background: #111;
+  color: #fff;
+  transform: translateX(100%);
+  transition: 0.3s;
+  z-index: 3000;
+}
+
+.painel-perfil.ativo {
+  transform: translateX(0);
+}
+
+.perfil-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.perfil-info {
+  padding: 15px;
+}
+
+.btn-logout {
+  margin: 15px;
+  padding: 10px;
+  width: 90%;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
+  <div class="overlay"></div>
+
+   <div class="menu-toggle" onclick="toggleMenu()">
+    ☰
+  </div>
+
     <svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="30" r="18" stroke="#25D366" stroke-width="2" fill="none"/>
   <text x="60" y="36" class="text">
@@ -723,18 +823,44 @@ nav a:hover {
   </text>
     </svg>
   <nav>
-    <div class="carrinho" aria-label="Carrinho de compras"  onclick="toggleCarrinho()">
-  🛒 <span id="contador">0</span>
+   <div class="cart" onclick="toggleCarrinho()">
+    🛒
+    <span id="cart-count">0</span>
 </div>
- <button class="login" onclick="window.location.href='login.html'">
+
+ <div id="painel-carrinho" class="painel-carrinho">
+
+  <div class="carrinho-header">
+    <h2>Meu Carrinho</h2>
+    <button onclick="toggleCarrinho()">✖</button>
+  </div>
+
+  <div id="itens">
+    <p>Seu carrinho está vazio</p>
+  </div>
+
+  <p id="total">Total: R$ 0,00</p>
+
+</div>
+
+ <button id="login" onclick="login()">Entrar</button>
   👤 Entrar
 </button>
+
+<div id="perfil" class="perfil" onclick="togglePerfil()" style="display:none;">
+  👤
+</div>
     <a href="#">Inicio</a>
     <a href="#">Produtos</a>
    <a href="#footer">Contato</a>
 
   </nav>
+
+  <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fa fa-bars"></i>
 </header>
+
+</div>
 
 <section class="banner">
   <h1>Periféricos Gamer de Alto Nível</h1>
@@ -840,16 +966,6 @@ nav a:hover {
     </div>
   </div>
 
-  <div class="overlay"></div>
-
-  <div id="painel-carrinho" class="painel-carrinho">
-  <div class="carrinho-header">
-     <h2>Meu Carrinho</h2>
-      </div>
-  <div id="itens"></div>
-     <p id="total">Total: R$ 0,00</p>
-      </div>
-
 </section>
 
 <footer class="footer hidden" id="footer">
@@ -882,48 +998,112 @@ nav a:hover {
   </div>
 </footer>
 
+<div id="painel-perfil" class="painel-perfil">
+
+  <div class="perfil-header">
+    <h2>Minha Conta</h2>
+    <button onclick="togglePerfil()">✖</button>
+  </div>
+
+  <div class="perfil-info">
+    <p><strong>Nome:</strong> <span id="nome-user">Usuário</span></p>
+    <p><strong>Email:</strong> <span id="email-user">email@email.com</span></p>
+  </div>
+
+  <button onclick="logout()" class="btn-logout">Sair</button>
+
+</div>
+
 <script>
+
+function login() {
+  localStorage.setItem("logado", "true");
+  localStorage.setItem("nome", "João");
+  localStorage.setItem("email", "joao@email.com");
+
+  verificarLogin();
+}
+
+// LOGOUT
+function logout() {
+  localStorage.removeItem("logado");
+  location.reload();
+}
+
+// VERIFICA
+function verificarLogin() {
+  const logado = localStorage.getItem("logado");
+
+  if (logado) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("perfil").style.display = "block";
+
+    document.getElementById("nome-user").innerText =
+      localStorage.getItem("nome");
+
+    document.getElementById("email-user").innerText =
+      localStorage.getItem("email");
+  }
+}
+
+// ABRIR PERFIL
+function togglePerfil() {
+  document
+    .getElementById("painel-perfil")
+    .classList.toggle("ativo");
+}
+
+// INICIA
+verificarLogin();
 
 let carrinho = [];
 
 const painel = document.getElementById("painel-carrinho");
 const overlay = document.querySelector(".overlay");
 
-// Carrinho
+// ABRIR / FECHAR
 function toggleCarrinho() {
   painel.classList.toggle("ativo");
   overlay.classList.toggle("ativo");
 }
 
+// FECHAR CLICANDO FORA
 overlay.addEventListener("click", () => {
   painel.classList.remove("ativo");
   overlay.classList.remove("ativo");
 });
 
-function adicionar(usuario, preco) {
-  carrinho.push({ usuario, preco });
+// ADICIONAR ITEM
+function adicionar(nome, preco) {
+  carrinho.push({ nome, preco });
   atualizarCarrinho();
 }
 
+// REMOVER ITEM
 function remover(index) {
   carrinho.splice(index, 1);
   atualizarCarrinho();
 }
 
+// ATUALIZAR UI
 function atualizarCarrinho() {
   const itens = document.getElementById("itens");
-  const contador = document.getElementById("contador");
+  const contador = document.getElementById("cart-count"); // ✅ corrigido
   const total = document.getElementById("total");
 
   itens.innerHTML = "";
   let soma = 0;
+
+  if (carrinho.length === 0) {
+    itens.innerHTML = "<p>Seu carrinho está vazio</p>";
+  }
 
   carrinho.forEach((item, index) => {
     soma += item.preco;
 
     itens.innerHTML += `
       <div class="item-carrinho">
-        <span>${item.usuario}</span>
+        <span>${item.nome}</span>
         <span>R$ ${item.preco.toFixed(2)}</span>
         <button onclick="remover(${index})" class="btn-remover">❌</button>
       </div>
@@ -934,14 +1114,13 @@ function atualizarCarrinho() {
   total.innerText = "Total: R$ " + soma.toFixed(2);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".btn-adicionar").forEach(btn => {
-    btn.addEventListener("click", () => {
-      adicionar(
-        btn.dataset.usuario,
-        parseFloat(btn.dataset.preco)
-      );
-    });
+// BOTÕES
+document.querySelectorAll(".btn-adicionar").forEach(btn => {
+  btn.addEventListener("click", () => {
+    adicionar(
+      btn.dataset.nome,
+      parseFloat(btn.dataset.preco)
+    );
   });
 });
 
@@ -999,12 +1178,22 @@ pesquisa.addEventListener("keyup", () => {
 const btnScroll = document.getElementById("btn-scroll");
 const produtosContainer = document.querySelector(".produtos");
 
-btnScroll.addEventListener("click", () => {
-  produtosContainer.scrollBy({
-    left: 300,
-    behavior: "smooth"
+if (btnScroll) {
+  btnScroll.addEventListener("click", () => {
+    produtosContainer.scrollBy({
+      left: 300,
+      behavior: "smooth"
+    });
   });
-});
+}
+
+function toggleMenu() {
+  const nav = document.querySelector("nav");
+  const overlay = document.querySelector(".overlay");
+
+  nav.classList.toggle("ativo");
+  overlay.classList.toggle("ativo");
+}
 
 </script>
 

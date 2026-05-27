@@ -329,15 +329,48 @@ async function login() {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.erro);
+      throw new Error(data.erro || "Erro no login");
+    }
+
+    // 💾 SALVA USUÁRIO
+    localStorage.setItem("user", JSON.stringify(data));
+
+    // 🎯 ATUALIZA UI
+    document.getElementById("btn-login").style.display = "none";
+    document.getElementById("perfil").style.display = "block";
+
+    // 👇 se vier do backend
+    if (data.nome) {
+      document.getElementById("nome-user").innerText = data.nome;
+      document.getElementById("email-user").innerText = data.email;
     }
 
     alert("Login feito!");
-    console.log(data);
 
   } catch (err) {
     alert(err.message);
   }
+}
+
+window.onload = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user) {
+    document.getElementById("btn-login").style.display = "none";
+    document.getElementById("perfil").style.display = "block";
+
+    if (user.nome) {
+      document.getElementById("nome-user").innerText = user.nome;
+      document.getElementById("email-user").innerText = user.email;
+    }
+  }
+};
+
+function logout() {
+  localStorage.removeItem("user");
+
+  document.getElementById("btn-login").style.display = "block";
+  document.getElementById("perfil").style.display = "none";
 }
 
 function toggleSenha() {
