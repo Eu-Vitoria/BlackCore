@@ -14,6 +14,10 @@
   --accent: #444;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -23,6 +27,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: var(--bg);
   color: var(--text);
+   overflow-x: hidden;
 }
 
 :focus {
@@ -636,6 +641,74 @@ nav a:hover {
   margin-top: 10px;
 }
 
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .carrinho {
+    width: 90%;
+    justify-content: center;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .produtos {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner h1 {
+    font-size: 1.8rem;
+  }
+
+  .banner p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .barra-pesquisa {
+    flex-direction: column;
+  }
+
+  .barra-pesquisa input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .painel-carrinho {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 
 </style>
 </head>
@@ -766,7 +839,7 @@ nav a:hover {
 </button>
     </div>
   </div>
->
+
   <div class="overlay"></div>
 
   <div id="painel-carrinho" class="painel-carrinho">
