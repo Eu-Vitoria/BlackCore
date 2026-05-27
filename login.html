@@ -352,6 +352,9 @@ async function login() {
   }
 }
 
+localStorage.setItem("usuario", JSON.stringify(data));
+window.location.href = "index.html";
+
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
