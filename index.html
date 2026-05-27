@@ -843,11 +843,14 @@ img, .card, .produtos, .banner, header {
 
 </div>
 
-<button class="login" onclick="window.location.href='login.html'">
-  👤 Entrar
-</button>
-<div id="perfil" class="perfil" onclick="togglePerfil()" style="display:none;">
-  👤
+
+<div id="area-usuario">
+  <button id="btn-login" onclick="window.location.href='login.html'">👤 Entrar</button>
+
+  <div id="perfil" style="display:none;">
+    <span id="nome-user"></span>
+    <button onclick="logout()">Sair</button>
+  </div>
 </div>
     <a href="#">Inicio</a>
     <a href="#">Produtos</a>
@@ -1015,34 +1018,19 @@ img, .card, .produtos, .banner, header {
 
 <script>
 
-async function login() {
-  const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
+window.onload = () => {
+  const user = JSON.parse(localStorage.getItem("usuario"));
 
-  try {
-    const res = await fetch("https://blackcore-5k72.onrender.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, senha })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.erro);
-    }
-
-    // ✅ salva usuário
-    localStorage.setItem("usuario", JSON.stringify(data));
-
-    // ✅ redireciona pra home
-    window.location.href = "inicial.html";
-
-  } catch (err) {
-    alert(err.message);
+  if (user) {
+    document.getElementById("btn-login").style.display = "none";
+    document.getElementById("perfil").style.display = "block";
+    document.getElementById("nome-user").innerText = user.nome;
   }
+};
+
+function logout() {
+  localStorage.removeItem("usuario");
+  location.reload();
 }
 
 let carrinho = [];

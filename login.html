@@ -266,8 +266,7 @@ input[type="submit"]:hover {
       <input type="checkbox" id="lembrar"> Lembrar de mim
     </label>
     
-     <button type="button" class="btn-login"
-        onclick="login()">
+     <button type="button" id="btn-login" class="btn-login" onclick="login()">
     Entrar
 </button>
 
@@ -343,19 +342,6 @@ async function login() {
   }
 }
 
-window.onload = () => {
-  const user = JSON.parse(localStorage.getItem("usuario"));
-
-  if (user) {
-    document.getElementById("btn-login").style.display = "none";
-    document.getElementById("perfil").style.display = "block";
-
-    if (user.nome) {
-      document.getElementById("nome-user").innerText = user.nome;
-      document.getElementById("email-user").innerText = user.email;
-    }
-  }
-};
 
 function logout() {
   localStorage.removeItem("user");
