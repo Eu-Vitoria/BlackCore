@@ -329,31 +329,19 @@ async function login() {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.erro || "Erro no login");
+      throw new Error(data.erro);
     }
 
-    // 💾 SALVA USUÁRIO
-    localStorage.setItem("user", JSON.stringify(data));
+    // ✅ salva usuário
+    localStorage.setItem("usuario", JSON.stringify(data));
 
-    // 🎯 ATUALIZA UI
-    document.getElementById("btn-login").style.display = "none";
-    document.getElementById("perfil").style.display = "block";
-
-    // 👇 se vier do backend
-    if (data.nome) {
-      document.getElementById("nome-user").innerText = data.nome;
-      document.getElementById("email-user").innerText = data.email;
-    }
-
-    alert("Login feito!");
+    // ✅ redireciona pra home
+    window.location.href = "inicial.html";
 
   } catch (err) {
     alert(err.message);
   }
 }
-
-localStorage.setItem("usuario", JSON.stringify(data));
-window.location.href = "index.html";
 
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));

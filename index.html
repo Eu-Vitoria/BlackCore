@@ -1015,14 +1015,34 @@ img, .card, .produtos, .banner, header {
 
 <script>
 
-  const user = JSON.parse(localStorage.getItem("usuario"));
+async function login() {
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
 
-if (user) {
-  document.getElementById("login").style.display = "none";
-  document.getElementById("perfil").style.display = "block";
+  try {
+    const res = await fetch("https://blackcore-5k72.onrender.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, senha })
+    });
 
-  document.getElementById("nome-user").innerText = user.nome;
-  document.getElementById("email-user").innerText = user.email;
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.erro);
+    }
+
+    // ✅ salva usuário
+    localStorage.setItem("usuario", JSON.stringify(data));
+
+    // ✅ redireciona pra home
+    window.location.href = "inicial.html";
+
+  } catch (err) {
+    alert(err.message);
+  }
 }
 
 let carrinho = [];
