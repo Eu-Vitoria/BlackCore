@@ -242,14 +242,14 @@ input[type="submit"]:hover {
     </svg>
 
   <nav>
-    <a href="inicial.html">Início</a>
+    <a href="index.html">Início</a>
     <a href="#">Produtos</a>
     <a href="#footer">Contato</a>
   </nav>
 </header>
 
 <div class="login-container">
-  <form action="inicial.html" method="get">
+  <form action="index.html" method="get">
 
     <h1>Login</h1>
 
@@ -336,7 +336,7 @@ async function login() {
     localStorage.setItem("usuario", JSON.stringify(data));
 
     // ✅ redireciona pra home
-    window.location.href = "inicial.html";
+    window.location.href = "index.html";
 
   } catch (err) {
     alert(err.message);
@@ -344,7 +344,7 @@ async function login() {
 }
 
 window.onload = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("usuario"));
 
   if (user) {
     document.getElementById("btn-login").style.display = "none";
