@@ -331,9 +331,9 @@ async function login() {
       throw new Error(data.erro);
     }
 
-    // ✅ salva usuário
-   localStorage.setItem("usuario", JSON.stringify({
-  nome: data.nome
+  localStorage.setItem("usuario", JSON.stringify({
+  nome: data.usuario.nome,
+  email: data.usuario.email
 }));
 
     // ✅ redireciona pra home
@@ -346,7 +346,7 @@ async function login() {
 
 
 function logout() {
-  localStorage.removeItem("user");
+  localStorage.removeItem("usuario");
 
   document.getElementById("btn-login").style.display = "block";
   document.getElementById("perfil").style.display = "none";
