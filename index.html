@@ -1038,23 +1038,25 @@ img, .card, .produtos, .banner, header {
 
 <script>
 
-window.onload = () => {
-  const user = JSON.parse(localStorage.getItem("usuario"));
+window.onload = async () => {
+  try {
+    const res = await fetch("https://seu-backend.onrender.com/user");
+    const data = await res.json();
 
-  if (user) {
+    const nome = data.nome || data.user?.name || "Usuário";
+
     document.getElementById("btn-login").style.display = "none";
     document.getElementById("perfil").style.display = "block";
 
-    const nomeHeader = document.getElementById("nome-user-header");
-    const nomePerfil = document.getElementById("nome-user-perfil");
+    document.getElementById("nome-user-header").innerText = nome;
+    document.getElementById("nome-user-perfil").innerText = nome;
 
-    // 🔥 pega qualquer formato possível
-    const nome = user.nome || user.name || user.user?.name || "Usuário";
-
-    if (nomeHeader) nomeHeader.innerText = nome;
-    if (nomePerfil) nomePerfil.innerText = nome;
+  } catch (erro) {
+    console.log("Não logado");
   }
 };
+
+console.log(JSON.parse(localStorage.getItem("usuario")));
 
 function logout() {
   localStorage.removeItem("usuario");
