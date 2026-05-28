@@ -332,7 +332,9 @@ async function login() {
     }
 
     // ✅ salva usuário
-    localStorage.setItem("usuario", JSON.stringify(data));
+   localStorage.setItem("usuario", JSON.stringify({
+  nome: data.nome
+}));
 
     // ✅ redireciona pra home
     window.location.href = "index.html";

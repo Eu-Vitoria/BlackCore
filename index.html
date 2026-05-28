@@ -1048,8 +1048,11 @@ window.onload = () => {
     const nomeHeader = document.getElementById("nome-user-header");
     const nomePerfil = document.getElementById("nome-user-perfil");
 
-    if (nomeHeader) nomeHeader.innerText = user.nome;
-    if (nomePerfil) nomePerfil.innerText = user.nome;
+    // 🔥 pega qualquer formato possível
+    const nome = user.nome || user.name || user.user?.name || "Usuário";
+
+    if (nomeHeader) nomeHeader.innerText = nome;
+    if (nomePerfil) nomePerfil.innerText = nome;
   }
 };
 
