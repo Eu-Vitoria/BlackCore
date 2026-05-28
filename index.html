@@ -868,8 +868,8 @@ img, .card, .produtos, .banner, header {
   <button id="btn-login" onclick="window.location.href='login.html'">👤 Entrar</button>
 
   <div id="perfil" style="display:none;">
-    <span id="nome-user-perfil"></span>
-    <button onclick="logout()">Sair</button>
+    <span id="nome-user-header"></span>
+    <button  class="btn-logout" onclick="logout()">Sair</button>
   </div>
 </div>
     <a href="#">Inicio</a>
@@ -1044,8 +1044,12 @@ window.onload = () => {
   if (user) {
     document.getElementById("btn-login").style.display = "none";
     document.getElementById("perfil").style.display = "block";
-    document.getElementById("nome-user-header").innerText = user.nome;
-    document.getElementById("nome-user-perfil").innerText = user.nome;
+
+    const nomeHeader = document.getElementById("nome-user-header");
+    const nomePerfil = document.getElementById("nome-user-perfil");
+
+    if (nomeHeader) nomeHeader.innerText = user.nome;
+    if (nomePerfil) nomePerfil.innerText = user.nome;
   }
 };
 
